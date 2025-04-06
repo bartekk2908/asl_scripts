@@ -1,2 +1,2 @@
-# asl_scripts
-My ASL scripts/autosplitters for LiveSplit 
+# My ASL scripts
+ASL documentation: https://github.com/LiveSplit/LiveSplit.AutoSplitters/blob/master/README.md
