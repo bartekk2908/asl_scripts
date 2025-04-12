@@ -13,27 +13,11 @@ startup
 
 	settings.Add("levelSplits", true, "Level Splits");
 	settings.SetToolTip("levelSplits", "Splits between every playable level. \nDoes not apply to the last split after defeating the final boss.");
-
-	// printing debug info
-	vars.debugInfoTimeCounter = 1;
 }
 
 init
 {
 	vars.canReset = true;
-
-	// printing debug info
-	Action PrintValues = () =>
-	{
-		print("levelNumber: " + vars.levelNumber.ToString());;
-		print("scene: " + current.scene.ToString());
-		print("bossHP: " + current.bossHP.ToString());
-		print("isDialogBox: " + current.isDialogBox.ToString());
-		print("canReset: " + vars.canReset.ToString());
-		print("debugInfoTimeCounter: " + vars.debugInfoTimeCounter.ToString());
-	};
-	vars.PrintValues = PrintValues;	
-	vars.PrintValues();
 }
 
 start
@@ -52,24 +36,11 @@ reset
 	return current.isDialogBox == 1  && current.scene == 0 && vars.canReset;
 }
 
-onReset
-{
-	vars.debugInfoTimeCounter = 1;
-}
-
 update
 {
 	if (current.scene != 0 && !vars.canReset)
 	{
 		vars.canReset = true;
-	}
-
-	// printing debug info
-	if (timer.CurrentTime.RealTime > TimeSpan.FromSeconds(10 * vars.debugInfoTimeCounter))
-	{
-		vars.PrintValues();
-		vars.debugInfoTimeCounter++;
-		return;
 	}
 }
 
