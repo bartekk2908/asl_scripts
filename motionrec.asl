@@ -9,10 +9,23 @@ state("MotionRec")
 
 startup
 {
-    vars.sceneNumbers = new int[] { 1, 2, 3, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 27, 29, 30, 32, 33, 35, 37, 38, 40, -1};
-
     settings.Add("levelSplits", true, "Level Splits");
     settings.SetToolTip("levelSplits", "Splits between every playable level.");
+
+	settings.Add("oldVersion", false, "Old Version (v1.02)");
+    settings.SetToolTip("oldVersion", "Set True if playing on version v1.02.");
+}
+
+init
+{
+	if (settings["oldVersion"])
+	{
+		vars.sceneNumbers = new int[] { 1, 2, 3, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 27, 29, 30, 32, 33, 35, 37, 38, 40, -1};
+	}
+	else
+	{
+		vars.sceneNumbers = new int[] { 1, 2, 3, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 28, 30, 32, 34, 36, 38, 40, 41, 43, -1};
+	}
 }
 
 start
