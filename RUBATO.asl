@@ -1,4 +1,12 @@
-state("RUBATO")
+state("RUBATO", "v1.1C_vm")
+{
+    short currentRoomID : 0x8BA7C8;
+    byte isStarting : 0x690850, 0x4B8, 0xE60;
+    byte isLoadingNow : 0x690850, 0x480, 0x660;
+    byte isEnding : 0x5FC480, 0x1E0, 0x2A8, 0x20, 0x460;
+}
+
+state("RUBATO", "v1.1G")
 {
     short currentRoomID : 0x3202B70;
     byte isStarting : 0x31EBCD0, 0x4B8, 0xE60;
@@ -19,6 +27,16 @@ init
 	// };
 	// vars.PrintValues = PrintValues;	
 	// vars.PrintValues();
+
+    int moduleSize = modules.First().ModuleMemorySize;
+    if (moduleSize == 9637888) 
+    {
+        version = "v1.1C_vm";
+    }
+    else if (moduleSize == 57651200) 
+    {
+        version = "v1.1G";
+    }
 
     vars.stagesRoomsID = new int[] { 76, 111, 251, 253, 458, 402, -1};
     // 0 - rm_fairground_1
