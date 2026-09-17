@@ -15,7 +15,7 @@ state("Ciapek")
 
 startup
 {
-    vars.margin = 0.06f;
+    vars.margin = 0.1f;
     settings.Add("onlyLastSplit", false, "Only last split (any%)");
     settings.SetToolTip("onlyLastSplit", "Set True if playing any% category.");
 }
