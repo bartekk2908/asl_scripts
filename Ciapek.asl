@@ -16,8 +16,6 @@ state("Ciapek")
 startup
 {
     vars.margin = 0.1f;
-    settings.Add("onlyLastSplit", false, "Only last split (any%)");
-    settings.SetToolTip("onlyLastSplit", "Set True if playing any% category.");
 }
 
 init
@@ -25,29 +23,11 @@ init
     vars.splitIndex = 0; 
 }
 
-update
-{
-    print(
-        "==========================\n" +
-        " | " + current.x.ToString() + 
-        " | " + current.y.ToString() + "\n" +
-        "=========================="
-    );  
-}
-
 start
 {
     if (current.isLoading == 0 && old.isLoading == 1)
     {
-        if (settings["onlyLastSplit"])
-        {
-            vars.splitIndex = 4; 
-        }
-        else
-        {
-            vars.splitIndex = 0;
-        }
-        
+        vars.splitIndex = 0;
         return true;
     }
 }
@@ -62,6 +42,11 @@ reset
 
 split
 {
+    if (current.isEnding == 1 && old.isEnding == 0)
+    {
+        return true;
+    }
+
     switch ((int)vars.splitIndex)
     {
         case 0:
@@ -90,14 +75,6 @@ split
 
         case 3:
             if (Math.Abs(current.x - 24.95f) <= vars.margin && Math.Abs(current.y - 41.55f) <= vars.margin)
-            {
-                vars.splitIndex++;
-                return true;
-            }
-            break;
-
-        case 4:
-            if (current.isEnding == 1 && old.isEnding == 0)
             {
                 vars.splitIndex++;
                 return true;
