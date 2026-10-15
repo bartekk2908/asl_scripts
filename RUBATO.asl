@@ -1,3 +1,17 @@
+state("RUBATO", "v1.2B")
+{
+    short currentRoomID : 0x33EAFC0;
+    byte isStarting : 0x33E6D38, 0x0, 0x7B0, 0x18, 0x60;
+    byte isEnding : 0x33D8960, 0x310, 0x208, 0xD60;
+}
+
+state("RUBATO", "v1.2A")
+{
+    short currentRoomID : 0x33E7070;
+    byte isStarting : 0x33E2DE8, 0x0, 0x7B0, 0x18, 0x60;
+    byte isEnding : 0x33D4A10, 0x310, 0x208, 0xD60;
+}
+
 state("RUBATO", "v1.1C_vm")
 {
     short currentRoomID : 0x8BA7C8;
@@ -14,30 +28,22 @@ state("RUBATO", "v1.1G")
     byte isEnding : 0x310D670, 0x1E0, 0x2A8, 0x20, 0x460;
 }
 
-state("RUBATO", "v1.2A")
-{
-    short currentRoomID : 0x33E7070;
-    byte isStarting : 0x33E2DE8, 0x0, 0x7B0, 0x18, 0x60;
-    byte isEnding : 0x33D4A10, 0x310, 0x208, 0xD60;
-}
-
 init
 {
 	// printing debug info
-    // vars.currentStage = 0;
-	// Action PrintValues = () =>
-	// {
-    // print("currentRoomID: " + current.currentRoomID.ToString());
-    // print("isStarting: " + current.isStarting.ToString());
-    // //  print("isLoading: " + current.isLoadingNow.ToString());
-    //  print("isEnding: " + current.isEnding.ToString());
-    //  print("vars.currentStage: " + vars.currentStage.ToString());
-	// };
-	// vars.PrintValues = PrintValues;	
-	// vars.PrintValues();
+    vars.currentStage = 0;
+	Action PrintValues = () =>
+	{
+    print("currentRoomID: " + current.currentRoomID.ToString());
+    print("isStarting: " + current.isStarting.ToString());
+     print("isEnding: " + current.isEnding.ToString());
+     print("vars.currentStage: " + vars.currentStage.ToString());
+	};
+	vars.PrintValues = PrintValues;	
+	vars.PrintValues();
 
     int moduleSize = modules.First().ModuleMemorySize;
-    // print("moduleSize: " + moduleSize.ToString());
+    print("moduleSize: " + moduleSize.ToString());
     if (moduleSize == 9637888) 
     {
         version = "v1.1C_vm";
@@ -50,8 +56,12 @@ init
     {
         version = "v1.2A";
     }
+    else if (moduleSize == 59801600)
+    {
+        version = "v1.2B";
+    }
 
-    if (version == "v1.2A")
+    if ((version == "v1.2A") || (version == "v1.2B"))
     {
         vars.stagesRoomsID = new int[] { 580, 111, 251, 458, 402, -1};
         // 0 - rm_fairground_intro_1
