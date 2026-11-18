@@ -40,10 +40,10 @@ init
      print("vars.currentStage: " + vars.currentStage.ToString());
 	};
 	vars.PrintValues = PrintValues;	
-	vars.PrintValues();
+	// vars.PrintValues();
 
     int moduleSize = modules.First().ModuleMemorySize;
-    print("moduleSize: " + moduleSize.ToString());
+    // print("moduleSize: " + moduleSize.ToString());
     if (moduleSize == 9637888) 
     {
         version = "v1.1C_vm";
