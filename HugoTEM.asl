@@ -10,7 +10,7 @@ init
     vars.mainMenuID = (byte)1;
     vars.introID = (byte)2;
     vars.menuID = (byte)3;
-    vars.levelIDs = new List<byte> {19, 5, 12, 22, 8, 15};
+    vars.levelIDs = new List<byte> {20, 6, 13, 22, 8, 15};
     vars.finalID = (byte)25;
 
     vars.endingTime = null;
@@ -28,6 +28,11 @@ reset
 
 split
 {
+    // if (old.levelID != current.levelID)
+    // {
+    //     print("ID: " + current.levelID.ToString());
+    // }
+
     if (current.levelID == vars.menuID && vars.levelIDs.Contains(old.levelID))
     {
         return true;
